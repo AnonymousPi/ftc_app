@@ -29,45 +29,45 @@ public class SensorTest_1 extends LinearOpMode {
 
 
     @Override
-        public void runOpMode() throws InterruptedException {
+    public void runOpMode() throws InterruptedException {
 
-            hardwareMap.logDevices();
+        hardwareMap.logDevices();
 
-            cdim = hardwareMap.deviceInterfaceModule.get("dim");
+        cdim = hardwareMap.deviceInterfaceModule.get("dim");
 
-            colorSensor = hardwareMap.colorSensor.get("mr");
-            t = hardwareMap.touchSensor.get("t");
+        colorSensor = hardwareMap.colorSensor.get("mr");
+        t = hardwareMap.touchSensor.get("t");
 
-            motorRight = hardwareMap.dcMotor.get("motor_2");
-            motorLeft = hardwareMap.dcMotor.get("motor_1");
+        motorRight = hardwareMap.dcMotor.get("motor_2");
+        motorLeft = hardwareMap.dcMotor.get("motor_1");
 
-            reflectedLightLeft = hardwareMap.lightSensor.get("light_sensor_l");
-            reflectedLightLeft.enableLed(true);  // turn on LED of light sensor.
-            reflectedLightRight = hardwareMap.lightSensor.get("light_sensor_r");
-            reflectedLightRight.enableLed(true);  // turn on LED of light sensor.
+        reflectedLightLeft = hardwareMap.lightSensor.get("light_sensor_l");
+        reflectedLightLeft.enableLed(true);  // turn on LED of light sensor.
+        reflectedLightRight = hardwareMap.lightSensor.get("light_sensor_r");
+        reflectedLightRight.enableLed(true);  // turn on LED of light sensor.
 
-            drive(BRAKE , 0 ); // Make sure robot is stopped
+        drive(BRAKE , 0 ); // Make sure robot is stopped
 
 
-            waitForStart(); // waiting for start button to press
+        waitForStart(); // waiting for start button to press
 
-            // start motor
-            drive(FORWARD,MOTOR_POWER );
+        // start motor
+        drive(FORWARD,MOTOR_POWER );
 
-            // Drive forward until you hit the touch sensor
-            while ( !t.isPressed() ){
-                //follow the line , using getDirection and drive methods
-                int direction2go ;
-                direction2go = getDirection ();
-                drive(direction2go,MOTOR_POWER);
-                waitOneFullHardwareCycle();
-            }
+        // Drive forward until you hit the touch sensor
+        while ( !t.isPressed() ){
+            //follow the line , using getDirection and drive methods
+            int direction2go ;
+            direction2go = getDirection ();
+            drive(direction2go,MOTOR_POWER);
+            waitOneFullHardwareCycle();
+        }
 
-            //stop motor
-            drive(BRAKE , 0 );
+        //stop motor
+        drive(BRAKE , 0 );
 
-            int count = 0;
-            float red_acc = 0 , blue_acc = 0 , red_final = 0 , blue_final = 0;
+        int count = 0;
+        float red_acc = 0 , blue_acc = 0 , red_final = 0 , blue_final = 0;
 
             /*
             //This loop measures and returns color data
@@ -87,84 +87,84 @@ public class SensorTest_1 extends LinearOpMode {
             }
             */
 
-            //measure and accumulate sensor samples 10 times
-            for ( count = 0 ; count < 10; count++) {
-                red_acc += colorSensor.red();
-                blue_acc += colorSensor.blue();
-            }
-            red_final = red_acc;
-            blue_final = blue_acc;
-            telemetry.addData("Red", red_final);
-            telemetry.addData("Blue", blue_final);
-        
-            // call servo function to press the right button here <<<<<<
+        //measure and accumulate sensor samples 10 times
+        for ( count = 0 ; count < 10; count++) {
+            red_acc += colorSensor.red();
+            blue_acc += colorSensor.blue();
         }
+        red_final = red_acc;
+        blue_final = blue_acc;
+        telemetry.addData("Red", red_final);
+        telemetry.addData("Blue", blue_final);
 
-
-        // this method reads the light sensors and returns which direction to move
-        private int getDirection(){
-            double random = Math.random(); // user this to flip a coin
-            int direction = FORWARD ;
-            int left_on  = 0 ;
-            int right_on = 0 ;
-            int dir = 0 ;
-
-            if ( reflectedLightLeft.getLightDetected() > LIGHT_THRESHOLD ){
-                left_on = 1 ;
-            }
-            if ( reflectedLightRight.getLightDetected() > LIGHT_THRESHOLD ){
-                right_on = 1 ;
-            }
-
-            dir = left_on * 10 + right_on  ; // gives 0,1,10,11
-
-            switch (dir){
-                case 11: direction = FORWARD ;
-                    break;
-                case 01: direction  = LEFT ;
-                    break;
-                case 10: direction = RIGHT;
-                    break;
-                case 00 :
-                    if ( random < 0.50 ){
-                        direction = LEFT ;
-                    }
-                    else{
-                        direction = RIGHT ;
-                    }
-                    break;
-            }
-            return direction ;
-        }
-
-        private void drive ( int direction , double power ){
-           switch (direction) {
-               case FORWARD :
-                   motorRight.setDirection(DcMotor.Direction.REVERSE);
-                   motorLeft.setDirection(DcMotor.Direction.FORWARD);
-                   motorRight.setPower(power);
-                   motorLeft.setPower(power);
-                   break;
-               case BACKWARD:
-                   motorRight.setDirection(DcMotor.Direction.FORWARD);
-                   motorLeft.setDirection(DcMotor.Direction.REVERSE);
-                   motorRight.setPower(power);
-                   motorLeft.setPower(power);
-                   break;
-               case LEFT:
-                   motorRight.setPower(0);
-                   motorLeft.setPower(power);
-                   break;
-               case RIGHT:
-                   motorRight.setPower(power);
-                   motorLeft.setPower(0);
-                   break;
-               case BRAKE:
-                   motorRight.setPower(0);
-                   motorLeft.setPower(0);
-                   break;
-           }
-        }
-
-
+        // call servo function to press the right button here <<<<<<
     }
+
+
+    // this method reads the light sensors and returns which direction to move
+    private int getDirection(){
+        double random = Math.random(); // user this to flip a coin
+        int direction = FORWARD ;
+        int left_on  = 0 ;
+        int right_on = 0 ;
+        int dir = 0 ;
+
+        if ( reflectedLightLeft.getLightDetected() > LIGHT_THRESHOLD ){
+            left_on = 1 ;
+        }
+        if ( reflectedLightRight.getLightDetected() > LIGHT_THRESHOLD ){
+            right_on = 1 ;
+        }
+
+        dir = left_on * 10 + right_on  ; // gives 0,1,10,11
+
+        switch (dir){
+            case 11: direction = FORWARD ;
+                break;
+            case 01: direction  = LEFT ;
+                break;
+            case 10: direction = RIGHT;
+                break;
+            case 00 :
+                if ( random < 0.50 ){
+                    direction = LEFT ;
+                }
+                else{
+                    direction = RIGHT ;
+                }
+                break;
+        }
+        return direction ;
+    }
+
+    private void drive ( int direction , double power ){
+        switch (direction) {
+            case FORWARD :
+                motorRight.setDirection(DcMotor.Direction.REVERSE);
+                motorLeft.setDirection(DcMotor.Direction.FORWARD);
+                motorRight.setPower(power);
+                motorLeft.setPower(power);
+                break;
+            case BACKWARD:
+                motorRight.setDirection(DcMotor.Direction.FORWARD);
+                motorLeft.setDirection(DcMotor.Direction.REVERSE);
+                motorRight.setPower(power);
+                motorLeft.setPower(power);
+                break;
+            case LEFT:
+                motorRight.setPower(0);
+                motorLeft.setPower(power);
+                break;
+            case RIGHT:
+                motorRight.setPower(power);
+                motorLeft.setPower(0);
+                break;
+            case BRAKE:
+                motorRight.setPower(0);
+                motorLeft.setPower(0);
+                break;
+        }
+    }
+
+
+}
