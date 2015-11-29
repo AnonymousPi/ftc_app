@@ -13,7 +13,7 @@ public class IMUNavLib {
     final static int RIGHT      = 3 ;
     final static int BRAKE      = 4 ;
 
-    final static double MOTOR_POWER = 0.2;// Higher values will cause the robot to move faster
+    //final static double MOTOR_POWER = 0.2;// Higher values will cause the robot to move faster
     final static double MIN_PWR = 0.15 ;
     final static double MAX_PWR = 0.99 ;
     final static double ERR_MRGN = 0.05 ;
@@ -37,7 +37,7 @@ public class IMUNavLib {
     }
 
 
-    private void drive (int direction , double power ){
+    public void drive (int direction , double power ){
 
         switch (direction) {
             case FORWARD :
