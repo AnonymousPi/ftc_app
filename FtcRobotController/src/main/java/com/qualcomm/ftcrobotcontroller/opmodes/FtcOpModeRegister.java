@@ -70,7 +70,7 @@ public class FtcOpModeRegister implements OpModeRegister
      * Uncomment any of the following lines if you want to register an op mode,
      * or do that registration in a static method annotated as @OpModeRegistrar.
      */
-
+      manager.register("ColorSensor01", ColorSensor01.class);
     //manager.register("NullOp", NullOp.class);
 
     //manager.register("MatrixK9TeleOp", MatrixK9TeleOp.class);

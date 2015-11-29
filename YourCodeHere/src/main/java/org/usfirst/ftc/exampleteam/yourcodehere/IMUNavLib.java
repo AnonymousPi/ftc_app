@@ -21,52 +21,54 @@ public class IMUNavLib {
     final static double P = 0.0045;
     double cntAcc;
 
+    private DcMotor _motorLeft ;
     private DcMotor _motorRight ;
+    private IBNO055IMU _imu ;
 
-        public void set_motorRight ( DcMotor motor) {
+    // The setter functions
+    public void set_motorRight ( DcMotor motor) {
             _motorRight = motor;
         }
-
-
-    private DcMotor _motorLeft ;
-
     public void set_motorLeft ( DcMotor motor) {
         _motorLeft = motor;
     }
+    public void set_imu (IBNO055IMU imu ){
+        _imu = imu ;
+    }
 
 
-    private void drive (DcMotor motorRight, DcMotor motorLeft, int direction , double power ){
+    private void drive (int direction , double power ){
 
         switch (direction) {
             case FORWARD :
-                motorRight.setDirection(DcMotor.Direction.FORWARD);
-                motorLeft.setDirection(DcMotor.Direction.REVERSE);
-                motorRight.setPower(power);
-                motorLeft.setPower(power);
+                _motorRight.setDirection(DcMotor.Direction.FORWARD);
+                _motorLeft.setDirection(DcMotor.Direction.REVERSE);
+                _motorRight.setPower(power);
+                _motorLeft.setPower(power);
                 break;
             case BACKWARD:
-                motorRight.setDirection(DcMotor.Direction.REVERSE);
-                motorLeft.setDirection(DcMotor.Direction.FORWARD);
-                motorRight.setPower(power);
-                motorLeft.setPower(power);
+                _motorRight.setDirection(DcMotor.Direction.REVERSE);
+                _motorLeft.setDirection(DcMotor.Direction.FORWARD);
+                _motorRight.setPower(power);
+                _motorLeft.setPower(power);
                 break;
             case LEFT:
-                motorRight.setPower(0);
-                motorLeft.setPower(power);
+                _motorRight.setPower(0);
+                _motorLeft.setPower(power);
                 break;
             case RIGHT:
-                motorRight.setPower(power);
-                motorLeft.setPower(0);
+                _motorRight.setPower(power);
+                _motorLeft.setPower(0);
                 break;
             case BRAKE:
-                motorRight.setPower(0);
-                motorLeft.setPower(0);
+                _motorRight.setPower(0);
+                _motorLeft.setPower(0);
                 break;
         }
     }
 
 
-    void adjustAngle(DcMotor motorRight, DcMotor motorLeft, double offsetFromTarget){
+    void adjustAngle(double offsetFromTarget){
 
         double rightPower, leftPower ;
 
@@ -90,23 +92,23 @@ public class IMUNavLib {
         }
         leftPower  = - rightPower;
 
-        motorRight.setPower(rightPower);
-        motorLeft.setPower(leftPower);
+        _motorRight.setPower(rightPower);
+        _motorLeft.setPower(leftPower);
     }
 
 
     //returns 0 if the heading == TargetHeading
-    int setHeading(DcMotor motorRight, DcMotor motorLeft, IBNO055IMU myImu, double TargetHeading){
+    int setHeading(double TargetHeading){
         double currentHeading ;
         double theta ;
         int returnVal = 0 ;
 
-        currentHeading = myImu.getAngularOrientation().heading;
+        currentHeading = _imu.getAngularOrientation().heading;
         theta = (TargetHeading - currentHeading) % 360;
         // mess with margin of error
         returnVal = 1 ;
         if ( Math.abs(theta) > ERR_MRGN ){
-            adjustAngle(motorRight, motorLeft, theta);
+            adjustAngle(theta);
         }
         else {
             cntAcc ++ ;
@@ -119,19 +121,9 @@ public class IMUNavLib {
         return returnVal ;
     }
 
-    void moveTo(DcMotor motorRight, DcMotor motorLeft, IBNO055IMU myImu, double heading) {
-        while (setHeading(motorRight, motorLeft, myImu, heading)== 1){
+    void moveTo(double heading) {
+        while (setHeading(heading)== 1){
         }
-
-
     }
-
-
-
-
-
-
-
-
 
 }
