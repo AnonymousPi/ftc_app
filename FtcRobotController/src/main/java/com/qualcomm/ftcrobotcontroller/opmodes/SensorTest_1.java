@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.LightSensor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
-
 public class SensorTest_1 extends LinearOpMode {
 
     ColorSensor colorSensor;
@@ -17,7 +16,7 @@ public class SensorTest_1 extends LinearOpMode {
     DcMotor motorLeft;
     LightSensor reflectedLightLeft, reflectedLightRight ;
 
-    final static double LIGHT_THRESHOLD = 0.5;
+    final static double LIGHT_THRESHOLD = 0.4;
     final static double MOTOR_POWER = 0.15; // Higher values will cause the robot to move faster
 
     // Defining constants for drive direction
@@ -35,13 +34,12 @@ public class SensorTest_1 extends LinearOpMode {
             hardwareMap.logDevices();
 
             cdim = hardwareMap.deviceInterfaceModule.get("dim");
-            colorSensor = hardwareMap.colorSensor.get("mr");
 
+            colorSensor = hardwareMap.colorSensor.get("mr");
             t = hardwareMap.touchSensor.get("t");
 
             motorRight = hardwareMap.dcMotor.get("motor_2");
             motorLeft = hardwareMap.dcMotor.get("motor_1");
-            motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
             reflectedLightLeft = hardwareMap.lightSensor.get("light_sensor_l");
             reflectedLightLeft.enableLed(true);  // turn on LED of light sensor.
@@ -49,6 +47,8 @@ public class SensorTest_1 extends LinearOpMode {
             reflectedLightRight.enableLed(true);  // turn on LED of light sensor.
 
             drive(BRAKE , 0 ); // Make sure robot is stopped
+
+
             waitForStart(); // waiting for start button to press
 
             // start motor
@@ -68,9 +68,9 @@ public class SensorTest_1 extends LinearOpMode {
 
             int count = 0;
             float red_acc = 0 , blue_acc = 0 , red_final = 0 , blue_final = 0;
-            //This loop measures and returns color data
 
             /*
+            //This loop measures and returns color data
             while (opModeIsActive()) {
                 count++;
                 red_acc += colorSensor.red();
@@ -97,7 +97,7 @@ public class SensorTest_1 extends LinearOpMode {
             telemetry.addData("Red", red_final);
             telemetry.addData("Blue", blue_final);
         
-            // call servo fundtion to press the right button here <<<<<<
+            // call servo function to press the right button here <<<<<<
         }
 
 
@@ -121,11 +121,11 @@ public class SensorTest_1 extends LinearOpMode {
             switch (dir){
                 case 11: direction = FORWARD ;
                     break;
-                case 1: direction  = LEFT ;
+                case 01: direction  = LEFT ;
                     break;
                 case 10: direction = RIGHT;
                     break;
-                case 0 :
+                case 00 :
                     if ( random < 0.50 ){
                         direction = LEFT ;
                     }
@@ -140,14 +140,14 @@ public class SensorTest_1 extends LinearOpMode {
         private void drive ( int direction , double power ){
            switch (direction) {
                case FORWARD :
-                   motorRight.setDirection(DcMotor.Direction.FORWARD);
-                   motorLeft.setDirection(DcMotor.Direction.REVERSE);
+                   motorRight.setDirection(DcMotor.Direction.REVERSE);
+                   motorLeft.setDirection(DcMotor.Direction.FORWARD);
                    motorRight.setPower(power);
                    motorLeft.setPower(power);
                    break;
                case BACKWARD:
-                   motorRight.setDirection(DcMotor.Direction.REVERSE);
-                   motorLeft.setDirection(DcMotor.Direction.FORWARD);
+                   motorRight.setDirection(DcMotor.Direction.FORWARD);
+                   motorLeft.setDirection(DcMotor.Direction.REVERSE);
                    motorRight.setPower(power);
                    motorLeft.setPower(power);
                    break;
