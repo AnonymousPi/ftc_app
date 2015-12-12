@@ -25,6 +25,12 @@ public class IMUNavLib {
     private DcMotor _motorRight ;
     private IBNO055IMU _imu ;
 
+    IMUNavLib( DcMotor motorR , DcMotor motorL , IBNO055IMU imu ){
+        _motorLeft  = motorL ;
+        _motorRight = motorR ;
+        _imu = imu ;
+    }
+
     // The setter functions
     public void set_motorRight ( DcMotor motor) {
             _motorRight = motor;
@@ -68,7 +74,7 @@ public class IMUNavLib {
     }
 
 
-    void adjustAngle(double offsetFromTarget){
+    private void adjustAngle(double offsetFromTarget){
 
         double rightPower, leftPower ;
 
@@ -98,7 +104,7 @@ public class IMUNavLib {
 
 
     //returns 0 if the heading == TargetHeading
-    int setHeading(double TargetHeading){
+    private int setHeading(double TargetHeading){
         double currentHeading ;
         double theta ;
         int returnVal = 0 ;
@@ -121,7 +127,7 @@ public class IMUNavLib {
         return returnVal ;
     }
 
-    void moveTo(double heading) {
+    public void moveTo(double heading) {
         while (setHeading(heading)== 1){
         }
     }

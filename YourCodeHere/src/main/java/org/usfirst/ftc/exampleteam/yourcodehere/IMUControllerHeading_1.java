@@ -41,7 +41,7 @@ public class IMUControllerHeading_1 extends SynchronousOpMode
     IBNO055IMU imu;
     ElapsedTime elapsed    = new ElapsedTime();
     IBNO055IMU.Parameters   parameters = new IBNO055IMU.Parameters();
-    IMUNavLib imuNav = new IMUNavLib();
+
 
     // Here we have state we use for updating the dashboard. The first of these is important
     // to read only once per update, as its acquisition is expensive. The remainder, though,
@@ -79,12 +79,14 @@ public class IMUControllerHeading_1 extends SynchronousOpMode
         parameters.loggingTag     = "BNO055";
         imu = ClassFactory.createAdaFruitBNO055IMU(hardwareMap.i2cDevice.get("imu"), parameters);
 
+
         motorRight = hardwareMap.dcMotor.get("motor_2");
         motorLeft = hardwareMap.dcMotor.get("motor_1");
+        IMUNavLib imuNav = new IMUNavLib( motorRight, motorLeft, imu);
 
-        imuNav.set_motorRight(motorRight) ;
-        imuNav.set_motorLeft (motorLeft) ;
-        imuNav.set_imu(imu);
+        //imuNav.set_motorRight(motorRight) ;
+        //imuNav.set_motorLeft (motorLeft) ;
+        //imuNav.set_imu(imu);
 
         imuNav.drive(BRAKE, 0); // Make sure robot is stopped
 
@@ -106,6 +108,7 @@ public class IMUControllerHeading_1 extends SynchronousOpMode
                 imuNav.drive(BRAKE, 0);
                 Thread.sleep(1000);
                 targetAngle = (targetAngle + 90) % 360;
+                imuNav.moveTo(targetAngle);
                 Thread.sleep(1000);
                 imuNav.drive(BRAKE, 0);
                 done = true ;
