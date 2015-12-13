@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.swerverobotics.library.interfaces.IBNO055IMU;
 
-public class IMUNavLib {
+public class TT_Nav {
 
     // Defining constants for drive direction
     final static int FORWARD    = 0 ;
@@ -25,7 +25,7 @@ public class IMUNavLib {
     private DcMotor _motorRight ;
     private IBNO055IMU _imu ;
 
-    IMUNavLib( DcMotor motorR , DcMotor motorL , IBNO055IMU imu ){
+    TT_Nav(DcMotor motorR, DcMotor motorL, IBNO055IMU imu){
         _motorLeft  = motorL ;
         _motorRight = motorR ;
         _imu = imu ;

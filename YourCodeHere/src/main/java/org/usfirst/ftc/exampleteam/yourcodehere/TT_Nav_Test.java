@@ -5,13 +5,8 @@ package org.usfirst.ftc.exampleteam.yourcodehere;
 
         import org.swerverobotics.library.ClassFactory;
         import org.swerverobotics.library.SynchronousOpMode;
-        import org.swerverobotics.library.interfaces.EulerAngles;
         import org.swerverobotics.library.interfaces.IBNO055IMU;
-        import org.swerverobotics.library.interfaces.IFunc;
-        import org.swerverobotics.library.interfaces.II2cDeviceClientUser;
-        import org.swerverobotics.library.interfaces.Position;
         import org.swerverobotics.library.interfaces.TeleOp;
-        import org.swerverobotics.library.interfaces.Velocity;
 
 /**
  * SynchIMUDemo gives a short demo on how to use the BNO055 Inertial Motion Unit (IMU) from AdaFruit.
@@ -19,7 +14,7 @@ package org.usfirst.ftc.exampleteam.yourcodehere;
  */
 @TeleOp(name="IMU Control Heading_1", group="8610 trials")
 // @Disabled
-public class IMUControllerHeading_1 extends SynchronousOpMode
+public class TT_Nav_Test extends SynchronousOpMode
 {
 
     DcMotor motorRight;
@@ -82,7 +77,7 @@ public class IMUControllerHeading_1 extends SynchronousOpMode
 
         motorRight = hardwareMap.dcMotor.get("motor_2");
         motorLeft = hardwareMap.dcMotor.get("motor_1");
-        IMUNavLib imuNav = new IMUNavLib( motorRight, motorLeft, imu);
+        TT_Nav imuNav = new TT_Nav( motorRight, motorLeft, imu);
 
         //imuNav.set_motorRight(motorRight) ;
         //imuNav.set_motorLeft (motorLeft) ;
@@ -98,7 +93,7 @@ public class IMUControllerHeading_1 extends SynchronousOpMode
 
         //targetAngle = targetHeading + 90 ;
         startTime = elapsed.time() * 1000.0;
-        motorLeft.setDirection(DcMotor.Direction.REVERSE);
+        //motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
         boolean done = false ;
         while ( opModeIsActive() ){
