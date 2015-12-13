@@ -1,6 +1,7 @@
 package org.usfirst.ftc.exampleteam.yourcodehere;
 
         import com.qualcomm.robotcore.hardware.DcMotor;
+        import com.qualcomm.robotcore.hardware.LightSensor;
         import com.qualcomm.robotcore.util.ElapsedTime;
 
         import org.swerverobotics.library.ClassFactory;
@@ -12,7 +13,7 @@ package org.usfirst.ftc.exampleteam.yourcodehere;
  * SynchIMUDemo gives a short demo on how to use the BNO055 Inertial Motion Unit (IMU) from AdaFruit.
  * http://www.adafruit.com/products/2472
  */
-@TeleOp(name="IMU Control Heading_1", group="8610 trials")
+@TeleOp(name="TT_Nav_Test", group="8610 trials")
 // @Disabled
 public class TT_Nav_Test extends SynchronousOpMode
 {
@@ -28,6 +29,7 @@ public class TT_Nav_Test extends SynchronousOpMode
     final static int RIGHT      = 3 ;
     final static int BRAKE      = 4 ;
 
+    LightSensor LR, LF ;
     //----------------------------------------------------------------------------------------------
     // State
     //----------------------------------------------------------------------------------------------
@@ -77,7 +79,7 @@ public class TT_Nav_Test extends SynchronousOpMode
 
         motorRight = hardwareMap.dcMotor.get("motor_2");
         motorLeft = hardwareMap.dcMotor.get("motor_1");
-        TT_Nav imuNav = new TT_Nav( motorRight, motorLeft, imu);
+        TT_Nav imuNav = new TT_Nav( motorRight, motorLeft, imu , false, LF, LR); // Not using Follow line
 
         //imuNav.set_motorRight(motorRight) ;
         //imuNav.set_motorLeft (motorLeft) ;
