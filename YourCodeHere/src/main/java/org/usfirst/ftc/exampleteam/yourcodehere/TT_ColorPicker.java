@@ -33,6 +33,7 @@ public class TT_ColorPicker {
 
     // 1 = blue ; 2 = red ; 0 = not sure
     public int getColor(){
+
         insertNewSamples( _colorSensor.red(), _colorSensor.blue());
         calcFinal();
         if ( _currentBlue > ( _currentRed + COLOR_THRESHOLD) ){
@@ -47,7 +48,7 @@ public class TT_ColorPicker {
     }
 
     private void insertNewSamples(float red, float blue){
-        for ( int i = 9 ; i >= 0 ; i-- ) {
+        for ( int i = 9 ; i >= 1 ; i-- ) {
             _runningRed[i]=_runningRed[i-1] ; // 0->1 ; 1->2 ; ... ; 10-> drop
             _runningBlue[i]=_runningBlue[i-1] ; // 0->1 ; 1->2 ; ... ; 10-> drop
         }

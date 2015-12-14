@@ -16,14 +16,16 @@ public class TT_ColorSensor_Test extends SynchronousOpMode {
     @Override public void main() throws InterruptedException
     {
         colorSensor = hardwareMap.colorSensor.get("mr");
+        colorSensor.enableLed(false);
         TT_ColorPicker colorPicker = new TT_ColorPicker(colorSensor) ;
 
         waitForStart();
 
         while ( opModeIsActive()) {
             telemetry.addData("red", this.colorSensor.red());
-            telemetry.addData("green", this.colorSensor.green());
+            telemetry.addData("blue", this.colorSensor.blue());
             telemetry.addData("TTColorPicker Value", colorPicker.getColor());
+            telemetry.update();
             this.idle();
         }
     }
