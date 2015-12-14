@@ -24,6 +24,7 @@ public class TT_ColorSensor_Test extends SynchronousOpMode {
             telemetry.addData("red", this.colorSensor.red());
             telemetry.addData("green", this.colorSensor.green());
             telemetry.addData("TTColorPicker Value", colorPicker.getColor());
+            this.idle();
         }
     }
 }

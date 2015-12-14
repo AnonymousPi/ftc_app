@@ -10,7 +10,7 @@ import org.swerverobotics.library.interfaces.*;
  * or a Modern Robotics color sensor named "colorSensor".
  */
 @TeleOp(name="Color Demo (sync)", group="Swerve Examples")
-@Disabled
+//@Disabled
 public class SyncColorDemo extends SynchronousOpMode
     {
     ColorSensor color;
@@ -19,7 +19,7 @@ public class SyncColorDemo extends SynchronousOpMode
     @Override
     protected void main() throws InterruptedException
         {
-        this.color = this.hardwareMap.colorSensor.get("colorSensor");
+        this.color = this.hardwareMap.colorSensor.get("mr");
         this.ledIsOn = true;
         this.color.enableLed(ledIsOn);
 
@@ -27,15 +27,6 @@ public class SyncColorDemo extends SynchronousOpMode
 
         while (opModeIsActive())
             {
-            if (updateGamepads())
-                {
-                // Press 'x' to toggle the LED
-                if (gamepad1.x)
-                    {
-                    this.ledIsOn = !this.ledIsOn;
-                    this.color.enableLed(this.ledIsOn);
-                    }
-                }
 
             telemetry.addData("red",   this.color.red());
             telemetry.addData("green", this.color.green());
