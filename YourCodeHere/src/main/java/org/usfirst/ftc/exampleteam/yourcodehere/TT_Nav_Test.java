@@ -79,6 +79,9 @@ public class TT_Nav_Test extends SynchronousOpMode
 
         motorRight = hardwareMap.dcMotor.get("motor_2");
         motorLeft = hardwareMap.dcMotor.get("motor_1");
+        LF = hardwareMap.lightSensor.get("light_sensor_l");
+        LR = hardwareMap.lightSensor.get("light_sensor_r");
+
         TT_Nav imuNav = new TT_Nav( motorRight, motorLeft, imu , false, LF, LR); // Not using Follow line
 
         //imuNav.set_motorRight(motorRight) ;
@@ -95,7 +98,7 @@ public class TT_Nav_Test extends SynchronousOpMode
 
         //targetAngle = targetHeading + 90 ;
         startTime = elapsed.time() * 1000.0;
-        //motorLeft.setDirection(DcMotor.Direction.REVERSE);
+        motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
         boolean done = false ;
         while ( opModeIsActive() ){
