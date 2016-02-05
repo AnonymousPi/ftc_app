@@ -70,6 +70,7 @@ public class FtcOpModeRegister implements OpModeRegister
      * Uncomment any of the following lines if you want to register an op mode,
      * or do that registration in a static method annotated as @OpModeRegistrar.
      */
+<<<<<<< HEAD
       manager.register("ColorSensor01", ColorSensor01.class);
     //manager.register("NullOp", NullOp.class);
 
@@ -80,9 +81,26 @@ public class FtcOpModeRegister implements OpModeRegister
     //manager.register ("PushBotManual", PushBotManual.class);
 
     //manager.register("MR Gyro Test", MRGyroTest.class);
+    //manager.register("K9TeleOp", K9TeleOp.class);
+    //manager.register("K9IrSeeker", K9IrSeeker.class);
+    //manager.register("K9Line", K9Line.class);
     //manager.register("AdafruitRGBExample", AdafruitRGBExample.class);
     //manager.register("ColorSensorDriver", ColorSensorDriver.class);
+    manager.register("AutoRedIn", TT_AutoRedIn.class);
+    manager.register("AutoRedOut", TT_AutoRedOut.class);
+    manager.register("AutoBlueIn", TT_AutoBlueIn.class);
+    manager.register("AutoBlueOut", TT_AutoBlueOut.class);
+    manager.register("TeleOp", TT_TeleOp.class);
+    manager.register("TuneUp", TT_TuneUp.class);
+    manager.register("SensorTest", TT_SensorTest.class);
 
+
+
+    //manager.register("PushBotManual", PushBotManual.class);
+    //manager.register("PushBotAuto", PushBotAuto.class);
+    //manager.register("PushBotDriveTouch", PushBotDriveTouch.class);
+    //manager.register("PushBotIrSeek", PushBotIrSeek.class);
+    //manager.register("PushBotSquare", PushBotSquare.class);
     //manager.register("IrSeekerOp", IrSeekerOp.class);
     //manager.register("CompassCalibration", CompassCalibration.class);
     //manager.register("I2cAddressChangeExample", LinearI2cAddressChange.class);
