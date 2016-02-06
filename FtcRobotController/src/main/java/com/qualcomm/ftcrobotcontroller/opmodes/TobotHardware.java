@@ -169,7 +169,7 @@ public class TobotHardware extends LinearOpMode {
     State state;
     ArmState arm_state;
 
-    public enum State {
+    enum State {
         STATE_TELEOP,    // state to test teleop
         STATE_AUTO,        // state to test auto routines
         STATE_TUNEUP    // state to manually tune up servo positions and arm positions

@@ -31,7 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-import com.qualcomm.hardware.HiTechnicNxtLightSensor;
+//import com.qualcomm.hardware.HiTechnicNxtLightSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -107,7 +107,7 @@ public class TT_SensorTest extends TobotHardware {
             }
             telemetry.addData("1. Red  cumu. / cur = ", red_final + String.format("/ %d", colorSensor.red()));
             telemetry.addData("2. Blue cumu. / cur = ", blue_final + String.format("/ %d", colorSensor.blue()));
-            telemetry.addData("3. TT Color Picker  = ", String.format("%s", cp.getColor().toString()));
+            // telemetry.addData("3. TT Color Picker  = ", String.format("%s", cp.getColor().toString()));
             telemetry.addData("4. L-lig./R-lig     = ", String.format("%.2f / %.2f", ls1.getLightDetected(), ls2.getLightDetected()));
             telemetry.addData("5. White detected   = ", detectwhite);
             telemetry.addData("6. ODS / Ultra      = ", String.format("%.4f / %.4f", op.getLightDetected(),ultra.getUltrasonicLevel()));
